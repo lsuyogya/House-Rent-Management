@@ -55,10 +55,10 @@
             <task id="47" name="Technical Design" color="#8cb6ce" meeting="false" start="2021-12-02" duration="105" complete="0" thirdDate="2021-11-22" thirdDate-constraint="0" expand="true"/>
             <task id="58" name="Design Review" color="#8cb6ce" meeting="false" start="2021-12-04" duration="105" complete="0" thirdDate="2021-11-22" thirdDate-constraint="0" expand="true"/>
         </task>
-        <task id="54" name="Build by Feature" color="#000033" meeting="false" start="2021-12-06" duration="123" complete="0" thirdDate="2021-11-22" thirdDate-constraint="0" expand="true">
-            <task id="55" name="Feature Prototype" color="#8cb6ce" meeting="false" start="2021-12-06" duration="60" complete="0" thirdDate="2021-11-22" thirdDate-constraint="0" expand="true"/>
-            <task id="64" name="Unit Testing" color="#8cb6ce" meeting="false" start="2021-12-06" duration="121" complete="0" thirdDate="2021-11-22" thirdDate-constraint="0" expand="true"/>
-            <task id="71" name="Code Review" color="#8cb6ce" meeting="false" start="2021-12-06" duration="123" complete="0" thirdDate="2021-11-22" thirdDate-constraint="0" expand="true"/>
+        <task id="54" name="Build by Feature" color="#000033" meeting="false" start="2021-12-06" duration="127" complete="0" thirdDate="2021-11-22" thirdDate-constraint="0" expand="true">
+            <task id="55" name="Feature Prototype" color="#8cb6ce" meeting="false" start="2021-12-06" duration="117" complete="0" thirdDate="2021-11-22" thirdDate-constraint="0" expand="true"/>
+            <task id="64" name="Unit Testing" color="#8cb6ce" meeting="false" start="2021-12-08" duration="121" complete="0" thirdDate="2021-11-22" thirdDate-constraint="0" expand="true"/>
+            <task id="71" name="Code Review" color="#8cb6ce" meeting="false" start="2021-12-10" duration="123" complete="0" thirdDate="2021-11-22" thirdDate-constraint="0" expand="true"/>
         </task>
     </tasks>
     <resources/>

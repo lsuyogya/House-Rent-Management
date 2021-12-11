@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2021-11-01" view-index="0" gantt-divider-location="545" resource-divider-location="300" version="3.1.3103" locale="en_US">
     <description/>
     <view zooming-state="default:8" id="gantt-chart">
-        <field id="tpd3" name="Name" width="249" order="0"/>
-        <field id="tpd4" name="Begin date" width="146" order="1"/>
-        <field id="tpd5" name="End date" width="146" order="2"/>
+        <field id="tpd3" name="Name" width="209" order="0"/>
+        <field id="tpd4" name="Begin date" width="123" order="1"/>
+        <field id="tpd5" name="End date" width="124" order="2"/>
+        <field id="tpc0" name="Completion" width="85" order="3"/>
         <option id="color.recent">
             <![CDATA[#000033]]>
         </option>
@@ -35,13 +36,22 @@
             <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
             <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
             <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+            <taskproperty id="tpc0" name="Completion" type="custom" valuetype="text" defaultvalue="Incomplete"/>
         </taskproperties>
         <task id="0" name="Initiation" color="#000033" meeting="false" start="2021-11-03" duration="9" complete="0" thirdDate="2021-11-22" thirdDate-constraint="0" expand="true">
-            <task id="1" name="Requirement Gathering" color="#8cb6ce" meeting="false" start="2021-11-03" duration="7" complete="0" thirdDate="2021-11-22" thirdDate-constraint="0" expand="true"/>
-            <task id="8" name="Risk Analysis" color="#8cb6ce" meeting="false" start="2021-11-06" duration="6" complete="0" thirdDate="2021-11-22" thirdDate-constraint="0" expand="true"/>
+            <customproperty taskproperty-id="tpc0" value="Complete"/>
+            <task id="1" name="Requirement Gathering" color="#8cb6ce" meeting="false" start="2021-11-03" duration="7" complete="0" thirdDate="2021-11-22" thirdDate-constraint="0" expand="true">
+                <customproperty taskproperty-id="tpc0" value="Complete"/>
+            </task>
+            <task id="8" name="Risk Analysis" color="#8cb6ce" meeting="false" start="2021-11-06" duration="6" complete="0" thirdDate="2021-11-22" thirdDate-constraint="0" expand="true">
+                <customproperty taskproperty-id="tpc0" value="Complete"/>
+            </task>
         </task>
         <task id="17" name="Develop Overall Model" color="#000033" meeting="false" start="2021-11-12" duration="147" complete="0" thirdDate="2021-11-22" thirdDate-constraint="0" expand="true">
-            <task id="89" name="Documentation" color="#8cb6ce" meeting="false" start="2021-11-12" duration="147" complete="0" thirdDate="2021-11-22" thirdDate-constraint="0" expand="true"/>
+            <customproperty taskproperty-id="tpc0" value="Partially Complete"/>
+            <task id="89" name="Documentation" color="#8cb6ce" meeting="false" start="2021-11-12" duration="147" complete="0" thirdDate="2021-11-22" thirdDate-constraint="0" expand="true">
+                <customproperty taskproperty-id="tpc0" value="Partially Complete"/>
+            </task>
             <task id="20" name="Domain Object Modeling" color="#8cb6ce" meeting="false" start="2021-11-25" duration="123" complete="0" thirdDate="2021-11-22" thirdDate-constraint="0" expand="true"/>
         </task>
         <task id="26" name="Build a Feature List" color="#000033" meeting="false" start="2021-11-28" duration="110" complete="0" thirdDate="2021-11-22" thirdDate-constraint="0" expand="true">

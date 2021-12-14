@@ -1,0 +1,46 @@
+.g-btn {
+  cursor: pointer;
+
+  font-family: "Lato";
+  font-style: normal;
+  font-size: 18px;
+  font-weight: 500;
+
+  border: none;
+  border-radius: 10px;
+
+  &.default {
+    @include dimension(42px, 180px);
+  }
+
+  &.small {
+    @include dimension(42px, 120px);
+  }
+
+  &.medium {
+    @include dimension(42px, 270px);
+  }
+
+  &.large {
+    @include dimension(42px, 320px);
+  }
+
+  &.primary {
+    @include button-type("primary");
+  }
+  &.secondary {
+    @include button-type("secondary");
+  }
+
+  &.danger {
+    @include button-type("danger");
+  }
+
+  &.outlined {
+    @include button-type("outlined");
+  }
+
+  &.disabled {
+    @include button-type("disabled");
+  }
+}

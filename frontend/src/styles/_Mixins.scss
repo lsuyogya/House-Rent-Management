@@ -1,0 +1,40 @@
+@mixin dimension($height, $width) {
+  height: $height;
+  width: $width;
+}
+
+@mixin button-type($type) {
+  @if $type == "primary" {
+    background-color: $primary;
+    color: white;
+    &:hover {
+      background-color: lighten($primary, 5);
+    }
+  } @else if $type == "secondary" {
+    background-color: $secondary;
+    color: white;
+    &:hover {
+      background-color: lighten($secondary, 5);
+    }
+  } @else if $type== "outlined" {
+    border: 1px solid $primary;
+    background-color: white;
+    color: $primary;
+    &:hover {
+      background-color: darken(white, 5);
+    }
+  } @else if $type == "danger" {
+    background-color: $dangerRed;
+    color: white;
+    &:hover {
+      background-color: darken($dangerRed, 5);
+    }
+  } @else if $type == "disabled" {
+    cursor: not-allowed;
+    background-color: $disabledGrey;
+    color: white;
+    &:hover {
+      background-color: lighten($disabledGrey, 5);
+    }
+  }
+}

@@ -1,0 +1,38 @@
+.tableContainer {
+	margin-top: 14px;
+	width: 80%;
+	background-color: $white;
+	overflow: hidden;
+	tr {
+		&:nth-of-type(odd) {
+			background-color: $white;
+		}
+		&:nth-of-type(even) {
+			background-color: hsl(0, 0%, 96%);
+		}
+	}
+	th {
+		background-color: $primary;
+		color: $secondary;
+		font-weight: 700;
+	}
+}
+.MuiTablePagination-root > * {
+	font-family: Lato;
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 22px;
+	letter-spacing: 0em;
+	text-align: left;
+	color: $primary;
+}
+.MuiTablePagination-actions {
+	border: 1px $primary;
+	border-radius: 10px;
+}
+
+.invoiceTableRows {
+	width: 100%;
+	// cursor: pointer;
+}

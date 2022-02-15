@@ -1,0 +1,109 @@
+.navbar {
+	display: flex;
+	flex-direction: column;
+	flex-shrink: 0;
+	background-color: $primary;
+	color: $white;
+	font-size: 0.75em;
+	width: clamp(5em, 20vw, 6em);
+	height: auto;
+	padding: 1em 0 1em 0;
+	align-content: center;
+	gap: 0.5em;
+	a:last-child {
+		margin-top: auto;
+	}
+	span {
+		@extend .horizontalCenter;
+		text-align: center;
+		width: 100%;
+	}
+	hr {
+		@extend .horizontalCenter;
+		border: 3px 0 0 0 solid $white;
+		border-radius: 0.2em;
+		margin: none;
+		width: clamp(4em, 80%, 6em);
+		outline: hidden;
+		box-shadow: none;
+		&.active {
+			border-color: $secondary;
+		}
+	}
+	a,
+	a:hover,
+	a:focus,
+	a:active {
+		text-decoration: none;
+		color: inherit;
+		text-align: center;
+	}
+}
+
+.icon {
+	@extend .horizontalCenter;
+	width: 80%;
+	height: #{width};
+	margin-bottom: 1em;
+}
+.maxWidth {
+	width: 100%;
+}
+
+.horizontalCenter {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.bodyContainer {
+	background-color: $white;
+	display: flex;
+	min-height: 100vh;
+	min-width: 100vw;
+}
+
+.body {
+	padding: 1.5em 1em 1em 1em;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1.5em;
+	.topMargin {
+		margin-top: 0.5em;
+	}
+	$boxShadow: 0.3em;
+	.title {
+		font-weight: 700;
+		font-size: 2rem;
+		color: $primary;
+	}
+	.bio {
+		color: $primary;
+		font-size: 1.1rem;
+		height: clamp(6em, 20vh, 8em);
+		width: clamp(10em, 50vw, 40em);
+		background-color: white;
+		padding: 1em;
+		box-shadow: inset $boxShadow $boxShadow $boxShadow #d1d9e6,
+			inset $boxShadow $boxShadow $boxShadow #ffffff90;
+		border-radius: 1em;
+		border-radius: 0.3em;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		.title {
+			text-align: center;
+			font-weight: 700;
+			font-size: 1.2rem;
+			color: $secondary;
+		}
+	}
+	.rating {
+		@extend .bio;
+		height: clamp(6em, 20vh, 8em);
+		width: clamp(6em, 20vw, 40em);
+		display: flex;
+		flex-wrap: wrap;
+		.title {
+			@extend .horizontalCenter;
+		}
+	}
+}

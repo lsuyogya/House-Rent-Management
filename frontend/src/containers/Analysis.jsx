@@ -1,6 +1,6 @@
 import React from "react";
-import Navbar from "./navbar";
-import { default as Body } from "./analysisBody";
+import Navbar from "../components/navbar";
+import { default as Body } from "../components/analysisBody";
 
 const Analysis = () => {
 	return (

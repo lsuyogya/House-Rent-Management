@@ -1,6 +1,6 @@
 import React from "react";
-import Navbar from "./navbar";
-import { default as Body } from "./billsBody";
+import Navbar from "../components/navbar";
+import { default as Body } from "../components/billsBody";
 
 const Bills = () => {
 	return (

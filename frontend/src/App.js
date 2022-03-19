@@ -1,13 +1,13 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Dashboard from "./components/Dashboard";
-import LoginForm from "./components/LoginForm";
-import RegisterForm from "./components/RegisterForm";
-import Houses from "./components/Houses";
-import Bills from "./components/Bills";
-import Analysis from "./components/Analysis";
-import Profile from "./components/Profile";
-import Map from "./components/Map";
-function AppRouter() {
+import Dashboard from "./containers/Dashboard";
+import LoginForm from "./containers/LoginForm";
+import RegisterForm from "./containers/RegisterForm";
+import Houses from "./containers/Houses";
+import Bills from "./containers/Bills";
+import Analysis from "./containers/Analysis";
+import Profile from "./containers/Profile";
+import Map from "./containers/Map";
+function App() {
 	return (
 		<div className="App">
 			<Router>
@@ -26,4 +26,4 @@ function AppRouter() {
 	);
 }
 
-export default AppRouter;
+export default App;

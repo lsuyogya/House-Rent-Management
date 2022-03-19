@@ -1,6 +1,6 @@
 import React from "react";
-import Navbar from "./navbar";
-import { default as Body } from "./mapBody";
+import Navbar from "../components/navbar";
+import { default as Body } from "../components/mapBody";
 
 const Map = () => {
 	return (

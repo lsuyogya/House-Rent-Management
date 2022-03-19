@@ -1,6 +1,6 @@
 import React from "react";
-import Navbar from "./navbar";
-import { default as Body } from "./dashboardBody";
+import Navbar from "../components/navbar";
+import { default as Body } from "../components/dashboardBody";
 
 function Dashboard() {
 	return (

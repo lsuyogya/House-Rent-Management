@@ -1,13 +1,13 @@
 import React from "react";
 import { useState } from "react";
-import Button from "./button";
+import Button from "../components/button";
 import { Login as loginapi } from "./api";
 import { ReactComponent as Logo } from "../assets/logo.svg";
 import { Link } from "react-router-dom";
 
 const LoginForm = () => {
 	const [formDetails, setFormDetails] = useState({
-		username: "",
+		email: "",
 		password: "",
 	});
 
@@ -25,9 +25,9 @@ const LoginForm = () => {
 			<form className="login">
 				<p>Enter your credentials and Log in to your dashboard</p>
 				<input
-					name="username"
-					type="text"
-					placeholder="Username"
+					name="email"
+					type="email"
+					placeholder="Email"
 					className="textField"
 					onChange={handleChange}
 				/>

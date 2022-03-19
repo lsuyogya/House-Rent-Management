@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import Button from "./button";
+import Button from "../components/button";
 import { Login as loginapi } from "./api";
 import { ReactComponent as Logo } from "../assets/logo.svg";
 import { Link } from "react-router-dom";

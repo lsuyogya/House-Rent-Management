@@ -1,9 +1,0 @@
-https://www.teamgantt.com/blog/how-to-use-gantt-charts-for-your-agile-project
-
-https://www.geeksforgeeks.org/difference-between-waterfall-model-and-incremental-model/#:~:text=Testing%20is%20done%20in%20waterfall,after%20every%20iteration%20of%20phase.&text=In%20incremental%20model%20overlapping%20of,take%20place%20in%20incremental%20model.
-https://www.projectmanager.com/waterfall-methodology
-https://tynerblain.com/blog/2006/03/27/foundation-series-feature-driven-development-fdd-explained/
-https://www.planview.com/resources/articles/fdd-agile/#:~:text=An%20overall%20model%20shape%20is,Feature%20and%20Build%20by%20Feature.
-https://www.geeksforgeeks.org/difference-between-technical-design-and-conceptual-design-in-software-engineering/
-https://www.geeksforgeeks.org/software-engineering-iterative-waterfall-model/
-https://www.lucidchart.com/blog/why-use-feature-driven-development

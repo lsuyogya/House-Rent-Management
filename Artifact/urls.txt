@@ -1,8 +1,0 @@
-https://strapi.io/
-https://alexkondov.com/tao-of-react/#favor-functional-components
-https://reactrouter.com/docs/en/v6/getting-started/concepts
-
-https://stackoverflow.com/questions/67882059/react-redux-useselector-hook-not-working
-https://stackoverflow.com/questions/3518002/how-can-i-set-the-default-value-for-an-html-select-element
-https://react-select.com/home
-

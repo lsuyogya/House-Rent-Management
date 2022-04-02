@@ -1,16 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Dashboard from "./containers/Dashboard";
-import LoginForm from "./containers/LoginForm";
-import RegisterForm from "./containers/RegisterForm";
-import Houses from "./containers/Houses";
-import Bills from "./containers/Bills";
-import Analysis from "./containers/Analysis";
-import Profile from "./containers/Profile";
-import Map from "./containers/Map";
+import Router from "./features/routing/Router";
+
 function App() {
 	return (
 		<div className="App">
-			<Router>
+			{/* <Router>
 				<Routes>
 					<Route path="/" element={<Dashboard />} />
 					<Route path="login" element={<LoginForm />} />
@@ -21,7 +14,8 @@ function App() {
 					<Route path="profile" element={<Profile />} />
 					<Route path="map" element={<Map />} />
 				</Routes>
-			</Router>
+			</Router> */}
+			<Router/>
 		</div>
 	);
 }

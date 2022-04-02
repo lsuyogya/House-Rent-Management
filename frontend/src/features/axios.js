@@ -3,8 +3,8 @@ import axios from "axios";
 const baseURL = "http://localhost:8000";
 
 let headers = {};
-if (localStorage.token) {
-	headers.Authorization = `Authorization ${localStorage.token}`;
+if (localStorage.authToken) {
+	// headers.Authorization = `Authorization ${localStorage.authToken}`;
 }
 
 const axiosInstance = axios.create({

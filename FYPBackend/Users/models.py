@@ -2,16 +2,17 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 # from django.contrib.auth.models import AbstractUser
 from django.urls import reverse
+from django.core.validators import RegexValidator
 
 # Create your models here.
 
 class UserManager(BaseUserManager):
-   def create_users(self, email, username, type, bio, profession, citizenship, password=None):
-   # def create_user(self, email, username, type, bio, profession, password=None):
+   def create_user(self, email, fullname, type, bio, profession, citizenship, phone_number, password=None):
+   # def create_user(self, email, fullname, type, bio, profession, password=None):
       if not email:
          raise ValueError ("User email is required")
-      if not username:
-         raise ValueError ("Username is required")
+      if not fullname:
+         raise ValueError ("Fullname is required")
       if not type:
          raise ValueError ("User type is required")
       if not bio:
@@ -25,27 +26,29 @@ class UserManager(BaseUserManager):
 
       user = self.model(
          email    =  self.normalize_email(email),
-         username = username,
+         fullname = fullname,
          type = type,
          bio = bio,
          profession = profession,
-         # citizenship = citizenship,
+         citizenship = citizenship,
+         phone_number = phone_number
          )
 
       user.set_password(password)
       user.save(using = self.db)
       return user
 
-   def create_superuser(self, email, username, type, bio, profession, citizenship, password=None):
-   # def create_superuser(self, email, username, type, bio, profession, password=None):
+   def create_superuser(self, email, fullname, type, bio, profession, citizenship, phone_number, password=None):
+   # def create_superuser(self, email, fullname, type, bio, profession, password=None):
       user = self.create_user(
          email       =  self.normalize_email(email),
-         username    = username,
+         fullname    = fullname,
          type        = type,
          bio         = bio,
          profession  = profession,
          citizenship = citizenship,
          password    = password,
+         phone_number= phone_number
          )
       user.is_admin=True
       user.is_staff=True
@@ -60,7 +63,7 @@ class User(AbstractBaseUser):
       TENANT      = "TENANT", "Tenant"
 
    email          = models.EmailField(max_length=255, unique=True) 
-   username       = models.CharField(max_length=100)
+   fullname       = models.CharField(max_length=100)
    date_joined    = models.DateTimeField(auto_now_add=True)
    last_login     = models.DateTimeField(auto_now=True)
    is_admin       = models.BooleanField(default=False)
@@ -72,17 +75,20 @@ class User(AbstractBaseUser):
    type           = models.CharField(max_length=50, choices=Types.choices, default=Types.TENANT)
    address        = models.CharField( max_length=50)
    bio            = models.TextField()
+   phone_number   = models.DecimalField(max_digits=10, decimal_places=0)
+   profile_pic    = models.FileField(upload_to="ProfilePics/", null=True, default=None)
+   stripe_acc     = models.CharField(max_length=100, unique=False, null=True)
    profession     = models.CharField(max_length=50)
    citizenship    = models.FileField(upload_to="Citizenships/", null=True, default=None)
 
    USERNAME_FIELD    = 'email'
-   REQUIRED_FIELDS   =  ['username', 'type', 'bio', 'profession', 'citizenship']
-   # REQUIRED_FIELDS   =  ['username', 'type', 'bio', 'profession']
+   REQUIRED_FIELDS   =  ['fullname', 'type', 'bio', 'profession', 'citizenship', 'phone_number']
+   # REQUIRED_FIELDS   =  ['fullname', 'type', 'bio', 'profession']
 
    objects = UserManager()
    
    def __str__(self):
-       return self.username + " , " + self.email + " , " + self.type 
+       return self.fullname + " , " + self.email + " , " + self.type 
 
    def has_perm(self, perm, obj=None):
       return self.is_admin
@@ -91,7 +97,7 @@ class User(AbstractBaseUser):
       return True 
 
    def get_absolute_url(self):
-       return reverse("user:detail", kwargs={"username": self.username})
+       return reverse("user:detail", kwargs={"fullname": self.fullname})
 
 class HouseholderManager(models.Manager):
    def get_queryset(self, *args, **kwargs):

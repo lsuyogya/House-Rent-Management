@@ -3,13 +3,20 @@ from rest_framework.views import APIView, Response
 from .serializers import HouseSerializer
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from .models import House
-
+from rest_framework.permissions import BasePermission, SAFE_METHODS
 
 # Create your views here.
+      # if request.method in SAFE_METHODS:
+      #    return False
+# class HouseAPIViewPermission(BasePermission):
+#    message = "Permission not granted"
+#    def has_permission(self, request, view):
+#       if request.method == POST 
+#       return message
+
 
 class HouseAPIView(APIView):
-   # permission_classes = [IsAuthenticated]
-   permission_classes = [AllowAny]
+   permission_classes = [IsAuthenticated]
    def get(self, request, *args, **kwargs):
       houses = House.objects.all()
       serializer = HouseSerializer(houses, many=True)
@@ -18,7 +25,7 @@ class HouseAPIView(APIView):
    def post(self, request, *args, **kwargs):
       serializer = HouseSerializer(data=request.data) 
 
-      if serializer.is_valid:
+      if serializer.is_valid():
          serializer.save()
          return Response("House added successfully")
       return Response(serializer.errors)
@@ -28,12 +35,13 @@ class MyHouseAPIView(APIView):
    def get(self, request):
       current_user = request.user
       if current_user.type == current_user.Types.HOUSEHOLDER:
-         houses = House.objects.filter(householder__exact = current_user.id)
+         houses = House.objects.all().filter(householder__exact = current_user.id)
       if current_user.type == current_user.Types.TENANT:
          houses = House.objects.all().filter(tenant__exact = current_user.id)
          
       serializer = HouseSerializer(houses, many=True)
       return Response(serializer.data)
+
 
    # def post(self, request):
    #    pass

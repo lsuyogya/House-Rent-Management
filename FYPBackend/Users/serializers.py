@@ -5,12 +5,17 @@ class UserSerializer(serializers.ModelSerializer):
    class Meta:
       model = User
       fields = [
-      'username'        ,
-      'type'           ,
-      'address'       , 
-      'bio'          ,  
-      'profession'  ,   
+      'id',
+      'fullname',
+      'email',
+      'type',
+      'address',
+      'bio',
+      'phone_number',
+      'profile_pic',
+      'stripe_acc',
+      'profession',
       'citizenship',
       ] 
-      # '__all__'
+      # fields = '__all__'
          

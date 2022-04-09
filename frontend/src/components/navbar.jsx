@@ -13,14 +13,14 @@ function Navbar({ active }) {
 	// const [logoutState, setLogoutState] = useState(false) 
 	// useEffect(()=>{
 	// 	if (logoutState){
-	// 		dispatch(wipeLogin)
-	// 		dispatch(setLogout)
+	// 		dispatch(setLogout())
 	// 		setLogoutState(false)
 	// 	}
 	// }, [logoutState])
 	const logoutHandler = () => {
-		// localStorage.clear()
-		dispatch(setLogout({}))
+		localStorage.clear()
+		dispatch(setLogout())
+		// setLogoutState(true)
 	}
 
 	return (

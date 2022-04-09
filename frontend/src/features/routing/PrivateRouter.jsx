@@ -1,33 +1,25 @@
-import { Navigate, Outlet } from "react-router-dom";
-import React from 'react'
-import { getAPI } from "../api/api";
-import axiosInstance from "../axios";
-import { useDispatch, useSelector } from "react-redux";
-import { getUser } from "../redux/userSlice";
+import { Navigate, Outlet } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { getAPI } from '../api/api';
+import axiosInstance from '../axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUser } from '../redux/userSlice';
+import axios from 'axios';
+import { getCheck } from '../redux/checkSlice';
 
 const useAuth = () => {
-    // const dispatch = useDispatch()
-    // dispatch(getUser)
-    const url = '/auth/users/me'
-
-    const response = axiosInstance.get(url).data;
-    // const data=response.data;
-    // getAPI(url).then((result)=>{
-    //     console.log(result.data)
-    // })
-    // const user = {loggedIn: false};
-    // return user && user.loggedIn;
-    // console.log("auth", data)
-    // const isAuth = useSelector(state=>state.user.self)
-    // return isAuth
-    return response;
+	const url = '/users/checkToken/';
+	const checkValidState = useSelector((state) => state.check.valid);
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(getCheck());
+	}, []);
+	return checkValidState;
 };
 
 const PrivateRouter = () => {
-  const isAuth = useAuth();
-  console.log("isAuth",isAuth)
+	const isAuth = useAuth();
+	return isAuth === 'true' ? <Outlet /> : <Navigate to="/login" />;
+};
 
-  return isAuth ? <Outlet/> : <Navigate to="/login"/>
-}
-
-export default PrivateRouter
+export default PrivateRouter;

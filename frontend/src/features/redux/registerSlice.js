@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getAPI, postAPI } from "../api/api";
+import {getUnauthenticatedAPI, postUnauthenticatedAPI } from "../api/api";
+
 import { useNavigate } from "react-router-dom";
 // import axios from "axios";
 
@@ -13,11 +14,11 @@ const initialState = {
 const url = "/auth/users/";
 
 export const getRegister = createAsyncThunk("register/getData", async () => {
-	return getAPI(url);
+	return getUnauthenticatedAPI(url);
 });
 
 export const setRegister = createAsyncThunk("register/setData", async (body) => {
-	return postAPI(url, body);
+	return postUnauthenticatedAPI(url, body);
 });
 
 const registerSlice = createSlice({
@@ -27,12 +28,8 @@ const registerSlice = createSlice({
 	extraReducers: (builder) => {
 		builder
 			.addCase(setRegister.fulfilled, (state, action) => {
-				// state.authToken = action.payload;
-				// localStorage.setItem('authToken', state.authToken)
 				state.status = "fulfilled";
 				state.payload = action.payload
-				// const navigate = useNavigate(); 
-				// window.location.href= "http://localhost:3000/login"
 			})
 			.addCase(setRegister.pending, (state) => {
 				state.status = "pending";

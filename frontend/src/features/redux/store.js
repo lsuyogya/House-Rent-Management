@@ -2,6 +2,8 @@ import houseReducer from "./houseSlice";
 import loginReducer from "./loginSlice";
 import registerReducer from "./registerSlice";
 import userReducer from "./userSlice"
+import logoutReducer from "./logoutSlice"
+import checkReducer from "./checkSlice"
 
 import {configureStore} from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage'
@@ -17,23 +19,26 @@ const appReducer = combineReducers({
 		register: registerReducer,
 		login	: loginReducer,  
 		user	: userReducer,
+		logout	: logoutReducer,
+		check	: checkReducer,
    });
 
-const rootReducer = (state, action) => {
-	if (action.type === 'logout/setData') {
-		storage.removeItem('persist:root')
-		storage.removeItem('authToken')
-	  	return appReducer(undefined, action)
-	}
-		return appReducer(state, action)
-}
+// const rootReducer = (state, action) => {
+// 	if (action.type === 'logout/setData') {
+// 		storage.removeItem('persist:root')
+// 		storage.removeItem('authToken')
+// 	  	return appReducer(undefined, action)
+// 	}
+// 		return appReducer(state, action)
+// }
 
 const persistConfig = {
 	key: 'root',
 	storage,
 }
 
-const persistedReducer = persistReducer(persistConfig, rootReducer)
+// const persistedReducer = persistReducer(persistConfig, rootReducer)
+const persistedReducer = persistReducer(persistConfig, appReducer)
 
 const Store = configureStore({
 	reducer: persistedReducer,

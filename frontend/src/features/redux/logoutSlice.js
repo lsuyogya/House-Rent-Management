@@ -8,8 +8,8 @@ const initialState = {
 
 const url = "/auth/token/logout";
 
-export const setLogout = createAsyncThunk("logout/setData", async (body) => {
-	return postAPI(url, body);
+export const setLogout = createAsyncThunk("logout/setData", async () => {
+	return postAPI(url, {});
 });
 
 const logoutSlice = createSlice({
@@ -19,7 +19,7 @@ const logoutSlice = createSlice({
 	extraReducers: (builder) => {
 		builder
 			.addCase(setLogout.fulfilled, (state, action) => {
-				state.auth = action.payload;
+				// state.auth = action.payload;
 				state.status = "fulfilled";
 			})
 			.addCase(setLogout.pending, (state) => {

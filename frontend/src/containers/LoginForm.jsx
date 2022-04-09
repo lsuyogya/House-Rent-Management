@@ -4,6 +4,7 @@ import { ReactComponent as Logo } from "../assets/logo.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setLogin } from "../features/redux/loginSlice";
+import { setLogout } from "../features/redux/logoutSlice";
 
 const LoginForm = () => {
 	const authData = useSelector(state=>state.login)
@@ -17,20 +18,17 @@ const LoginForm = () => {
 		password: "",
 	});
 
-	// useEffect(()=>{
-	// 	localStorage.clear()
-	// 	if (authData.auth!=undefined && (typeof authData.auth == typeof {} )){
-	// 		window.location.href="http://localhost:3000/"
-	// 	}
-	// }, [])
+	useEffect(()=>{
+		localStorage.removeItem('authToken')
+		localStorage.removeItem('persist:root')
+		// dispatch(setLogout())
+	}, [])
 	
 	useEffect(()=>{
 		if (dispatchToggle){
 
 			dispatch(setLogin(formDetails))
 			setdispatchToggle(false)
-			localStorage.setItem('authToken', authData.auth.token ) 
-			navigate('/')
 		}
 
 	}, [dispatchToggle])
@@ -45,8 +43,9 @@ const LoginForm = () => {
 	
 	const loginSubmitHandler = (e) => {
 		setdispatchToggle(true)
-		if (authData.auth===undefined && (typeof authData.auth != typeof {} )) return
-		localStorage.setItem('authToken', authData.auth.token ) 
+		// if (authData.auth===undefined && (typeof authData.auth != typeof {} )) return
+		// localStorage.setItem('authToken', authData.auth.token ) 
+		
 	}
 	
 	return (

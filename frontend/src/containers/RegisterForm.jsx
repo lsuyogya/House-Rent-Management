@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Button from "../components/Button";
 import { ReactComponent as Logo } from "../assets/logo.svg";
-import { Link } from "react-router-dom";
+import { Link,  useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setRegister } from "../features/redux/registerSlice";
 
@@ -23,6 +23,7 @@ const LoginForm = () => {
 
 	const [dispatchToggle, setdispatchToggle] = useState(false);
 	const dispatch = useDispatch()
+	const nav = useNavigate()
 	const formData = new FormData()
 
 	useEffect(()=>{
@@ -36,6 +37,7 @@ const LoginForm = () => {
 			formData.append('citizenship', file)
 			dispatch(setRegister(formData))
 			setdispatchToggle(false)
+			localStorage.clear()
 		}
 	}, [dispatchToggle])
 	
@@ -50,16 +52,18 @@ const LoginForm = () => {
 	};
 	
 	const registerSubmitHandler = (e) => {
-
-			// dispatch(setRegister(formData))
+		
+		// dispatch(setRegister(formData))
 		setdispatchToggle(true)
 		
+		localStorage.clear()
 		console.log("Status",registerData.status)
 		// if (registerData.status)
 	}
-
+	
 	if (registerData.payload!=undefined && (typeof registerData.payload == typeof {} )){
-		window.location.href="http://localhost:3000/login"
+		localStorage.clear();
+		nav("/login")
 	}
 
 	return (

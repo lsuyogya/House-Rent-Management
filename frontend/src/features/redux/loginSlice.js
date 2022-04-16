@@ -4,6 +4,9 @@ import { getUnauthenticatedAPI, postUnauthenticatedAPI } from '../api/api';
 
 const initialState = {
 	status: '',
+	id: '',
+	token: '',
+	type: '',
 };
 
 const url = '/users/login/';
@@ -23,8 +26,10 @@ const loginSlice = createSlice({
 	extraReducers: (builder) => {
 		builder
 			.addCase(setLogin.fulfilled, (state, action) => {
-				state.auth = action.payload;
+				state.token = action.payload?.token;
+				state.type = action.payload?.type;
 				state.status = 'fulfilled';
+				state.id = action.payload?.id;
 				localStorage.setItem('authToken', action.payload.token);
 				window.location.href = '/';
 			})

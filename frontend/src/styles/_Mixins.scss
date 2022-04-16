@@ -13,6 +13,7 @@
   } @else if $type == "secondary" {
     background-color: $secondary;
     color: white;
+    color: $primary;
     &:hover {
       background-color: lighten($secondary, 5);
     }

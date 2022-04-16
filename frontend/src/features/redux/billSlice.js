@@ -3,57 +3,57 @@ import { getAPI, postAPI, patchAPI } from '../api/api';
 // import axios from "axios";
 
 const initialState = {
-	houseRows: ['sth'],
+	billRows: ['sth'],
 	status: '',
 };
 
-const url = '/houses/';
+const url = '/bills/';
 
-export const getHouse = createAsyncThunk('house/getData', async () => {
+export const getBill = createAsyncThunk('bill/getData', async () => {
 	return getAPI(url);
 });
-export const getMyHouses = createAsyncThunk('house/getMyData', async () => {
+export const getMyBills = createAsyncThunk('bill/getMyData', async () => {
 	return getAPI(`${url}me/`);
 });
 
-export const getMarkers = createAsyncThunk('house/getMarkers', async () => {
+export const getMarkers = createAsyncThunk('bill/getMarkers', async () => {
 	return getAPI(`${url}map/`);
 });
 
-export const setHouse = createAsyncThunk('house/setData', async (body) => {
+export const setBill = createAsyncThunk('bill/setData', async (body) => {
 	return postAPI(url, body);
 });
 
-export const patchHouse = createAsyncThunk('house/patchData', async (props) => {
+export const patchBill = createAsyncThunk('bill/patchData', async (props) => {
 	return patchAPI(`${url}${props.id}/`, props.formData);
 	// return patchAPI(`${url}${id}/`, formData);
 });
 
-const houseSlice = createSlice({
-	name: 'house',
+const billSlice = createSlice({
+	name: 'bill',
 	initialState,
 	reducer: {},
 	extraReducers: (builder) => {
 		builder
-			.addCase(getHouse.fulfilled, (state, action) => {
-				state.houseRows = action.payload;
+			.addCase(getBill.fulfilled, (state, action) => {
+				state.billRows = action.payload;
 				state.status = 'fulfilled';
 			})
 			.addCase(getMarkers.fulfilled, (state, action) => {
 				state.map = action.payload;
 				state.status = 'fulfilled';
 			})
-			.addCase(getMyHouses.fulfilled, (state, action) => {
-				state.myHouses = action.payload;
+			.addCase(getMyBills.fulfilled, (state, action) => {
+				state.myBills = action.payload;
 				state.status = 'fulfilled';
 			})
-			.addCase(getHouse.pending, (state) => {
+			.addCase(getBill.pending, (state) => {
 				state.status = 'pending';
 			})
-			.addCase(getHouse.rejected, (state) => {
+			.addCase(getBill.rejected, (state) => {
 				state.status = 'rejected';
 			});
 	},
 });
 
-export default houseSlice.reducer;
+export default billSlice.reducer;

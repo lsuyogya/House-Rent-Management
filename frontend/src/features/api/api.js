@@ -1,5 +1,5 @@
-import axiosInstance from "../axios";
-import axios from "axios";
+import axiosInstance from '../axios';
+import axios from 'axios';
 
 const baseUrl = `${process.env.REACT_APP_Base_Url_Backend}`;
 
@@ -15,6 +15,15 @@ export const getAPI = async (url) => {
 export const postAPI = async (url, body) => {
 	try {
 		const response = await axiosInstance.post(url, body);
+		return response.data;
+	} catch (e) {
+		return `Request failed: \n ${e.message}`;
+	}
+};
+
+export const patchAPI = async (url, body) => {
+	try {
+		const response = await axiosInstance.patch(url, body);
 		return response.data;
 	} catch (e) {
 		return `Request failed: \n ${e.message}`;

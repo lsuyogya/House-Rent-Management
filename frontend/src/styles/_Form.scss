@@ -1,4 +1,4 @@
-.login {
+.login, .houeAddition {
   font-family: "Lato", sans-serif;
   width: 320px;
   font-size: 16px;
@@ -84,4 +84,20 @@
       margin: auto;
     }
   }
+}
+.flex{
+  display: flex;
+  width: calc(100%-2em);
+  gap: 2em;
+  flex-direction: row;
+  padding: 2em;
+  margin-left: auto;
+  margin-right: auto;
+}
+.houeAddition{
+  // flex: 50%;
+  height: auto;
+}
+label{
+  color: $primary;
 }

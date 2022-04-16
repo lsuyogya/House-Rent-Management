@@ -1,0 +1,42 @@
+$border-radius:0.5em;
+.card{
+    background-color: #ecf0f3;
+    box-shadow: 1em 1em 1em #d1d9e6, -1em -1em 1em #ffffff90;
+    border-radius: $border-radius;
+    padding-bottom: 1em;
+    font-size: 1em;
+    min-width: 15em;
+    // display: flex;
+    // flex-wrap: wrap;
+    // flex-direction: column;
+
+    .index{
+        color:$secondary;
+        width: 100%;
+        justify-content: center;
+        font-weight: 700;
+    }
+    div{
+        display: flex;
+        .key{
+            color: $purple;
+            flex: 60%;
+            font-weight: 500;
+        }
+        .value{
+            color: $primary;
+            flex: 40%;
+
+        }
+        .key,.value{
+            margin-top: 1em;
+            font-size: 0.7em;
+        }
+        img{
+            border-top-left-radius:$border-radius;
+            border-top-right-radius:$border-radius;
+            box-shadow: 0 8px 6px -6px black;
+        }
+       
+    }
+}

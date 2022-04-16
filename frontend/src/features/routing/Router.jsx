@@ -10,6 +10,9 @@ import Map from '../../containers/Map';
 import React from 'react';
 import PrivateRouter from './PrivateRouter';
 import AddHouse from '../../containers/AddHouse';
+import UpdateHouse from '../../containers/UpdateHouse';
+import AddBill from '../../containers/AddBill';
+import UpdateBill from '../../containers/UpdateBill';
 
 const Router = () => {
 	return (
@@ -21,7 +24,10 @@ const Router = () => {
 					<Route path="/" element={<Dashboard />} />
 					<Route path="houses" element={<Houses />} />
 					<Route path="addHouse" element={<AddHouse />} />
+					<Route path="updateHouse" element={<UpdateHouse />} />
 					<Route path="bills" element={<Bills />} />
+					<Route path="addBill" element={<AddBill />}></Route>
+					<Route path="updateBill" element={<UpdateBill />} />
 					<Route path="analysis" element={<Analysis />} />
 					<Route path="profile" element={<Profile />} />
 					<Route path="map" element={<Map />} />

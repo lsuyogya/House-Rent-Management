@@ -1,37 +1,35 @@
-import React, { useEffect , useState } from "react";
-import Button from "../components/Button";
-import { ReactComponent as Logo } from "../assets/logo.svg";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { setLogin } from "../features/redux/loginSlice";
-import { setLogout } from "../features/redux/logoutSlice";
+import React, { useEffect, useState } from 'react';
+import Button from '../components/Button';
+import { ReactComponent as Logo } from '../assets/logo.svg';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { setLogin } from '../features/redux/loginSlice';
+import { setLogout } from '../features/redux/logoutSlice';
 
 const LoginForm = () => {
-	const authData = useSelector(state=>state.login)
-	const dispatch = useDispatch()
-	const navigate = useNavigate()
-	
+	const authData = useSelector((state) => state.login);
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
 	const [dispatchToggle, setdispatchToggle] = useState(false);
-	
+
 	const [formDetails, setFormDetails] = useState({
-		username: "",
-		password: "",
+		username: '',
+		password: '',
 	});
 
-	useEffect(()=>{
-		localStorage.removeItem('authToken')
-		localStorage.removeItem('persist:root')
+	useEffect(() => {
+		localStorage.removeItem('authToken');
+		localStorage.removeItem('persist:root');
 		// dispatch(setLogout())
-	}, [])
-	
-	useEffect(()=>{
-		if (dispatchToggle){
+	}, []);
 
-			dispatch(setLogin(formDetails))
-			setdispatchToggle(false)
+	useEffect(() => {
+		if (dispatchToggle) {
+			dispatch(setLogin(formDetails));
+			setdispatchToggle(false);
 		}
-
-	}, [dispatchToggle])
+	}, [dispatchToggle]);
 
 	const handleChange = (e) => {
 		const value = e.target.value;
@@ -40,14 +38,13 @@ const LoginForm = () => {
 			[e.target.name]: value,
 		});
 	};
-	
+
 	const loginSubmitHandler = (e) => {
-		setdispatchToggle(true)
+		setdispatchToggle(true);
 		// if (authData.auth===undefined && (typeof authData.auth != typeof {} )) return
-		// localStorage.setItem('authToken', authData.auth.token ) 
-		
-	}
-	
+		// localStorage.setItem('authToken', authData.auth.token )
+	};
+
 	return (
 		<>
 			<Logo />
@@ -69,15 +66,10 @@ const LoginForm = () => {
 				/>
 				<div
 					style={{
-						display: "flex",
-						marginTop: "5px",
-					}}
-				>
-					<input
-						type="checkbox"
-						className="checkBox"
-						name="Remember me"
-					/>
+						display: 'flex',
+						marginTop: '5px',
+					}}>
+					<input type="checkbox" className="checkBox" name="Remember me" />
 					<label className="checkBox label">Remember me</label>
 				</div>
 				<Button

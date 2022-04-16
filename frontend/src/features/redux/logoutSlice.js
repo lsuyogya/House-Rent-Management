@@ -1,32 +1,38 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getAPI, postAPI } from "../api/api";
-// import axios from "axios";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { getAPI, postAPI } from '../api/api';
+import Store from './store';
+// import { persistStore } from 'redux-persist';
+
+// // import axios from "axios";
+// const persistor = persistStore(Store);
 
 const initialState = {
-	status: "",
+	status: '',
 };
 
-const url = "/auth/token/logout";
+const url = '/auth/token/logout';
 
-export const setLogout = createAsyncThunk("logout/setData", async () => {
+export const setLogout = createAsyncThunk('logout/setData', async () => {
 	return postAPI(url, {});
 });
 
 const logoutSlice = createSlice({
-	name: "logout",
+	name: 'logout',
 	initialState,
 	reducer: {},
 	extraReducers: (builder) => {
 		builder
 			.addCase(setLogout.fulfilled, (state, action) => {
 				// state.auth = action.payload;
-				state.status = "fulfilled";
+				state.status = 'fulfilled';
+				localStorage.clear();
+				// persistor.purge();
 			})
 			.addCase(setLogout.pending, (state) => {
-				state.status = "pending";
+				state.status = 'pending';
 			})
 			.addCase(setLogout.rejected, (state) => {
-				state.status = "rejected";
+				state.status = 'rejected';
 			});
 	},
 });

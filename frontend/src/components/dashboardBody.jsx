@@ -1,127 +1,13 @@
-import React from // ,{ useState }
-'react';
+import React from 'react'; // ,{ useState }
 import Avatar from 'react-avatar';
 import Rating from '@mui/material/Rating';
 import Tables from './table';
 import { useSelector } from 'react-redux';
+import LineChart from './LineChart';
 
 function DashboardBody() {
-	const tableCols = [
-		'Bill No.',
-		'Amount',
-		'Date',
-		'House No.',
-		'House Name',
-		'Status',
-	];
-	const tableRows = [
-		{
-			bill_no: '1',
-			amount: '2',
-			date: '3',
-			house_no: '4',
-			house_name: '5',
-			status: '6',
-		},
-		{
-			bill_no: '2',
-			amount: '2',
-			date: '3',
-			house_no: '4',
-			house_name: '5',
-			status: '6',
-		},
-		{
-			bill_no: '3',
-			amount: '2',
-			date: '3',
-			house_no: '4',
-			house_name: '5',
-			status: '6',
-		},
-		{
-			bill_no: '4',
-			amount: '2',
-			date: '3',
-			house_no: '4',
-			house_name: '5',
-			status: '6',
-		},
-		{
-			bill_no: '5',
-			amount: '2',
-			date: '3',
-			house_no: '4',
-			house_name: '5',
-			status: '6',
-		},
-		{
-			bill_no: '6',
-			amount: '2',
-			date: '3',
-			house_no: '4',
-			house_name: '5',
-			status: '6',
-		},
-		{
-			bill_no: '7',
-			amount: '2',
-			date: '3',
-			house_no: '4',
-			house_name: '5',
-			status: '6',
-		},
-		{
-			bill_no: '8',
-			amount: '2',
-			date: '3',
-			house_no: '4',
-			house_name: '5',
-			status: '6',
-		},
-		{
-			bill_no: '9',
-			amount: '2',
-			date: '3',
-			house_no: '4',
-			house_name: '5',
-			status: '6',
-		},
-		{
-			bill_no: '10',
-			amount: '2',
-			date: '3',
-			house_no: '4',
-			house_name: '5',
-			status: '6',
-		},
-		{
-			bill_no: '11',
-			amount: '2',
-			date: '3',
-			house_no: '4',
-			house_name: '5',
-			status: '6',
-		},
-		{
-			bill_no: '12',
-			amount: '2',
-			date: '3',
-			house_no: '4',
-			house_name: '5',
-			status: '6',
-		},
-		{
-			bill_no: '13',
-			amount: '2',
-			date: '3',
-			house_no: '4',
-			house_name: '5',
-			status: '6',
-		},
-	];
-
-	const accountType = useSelector((state) => state.login.auth.type);
+	const accountType = useSelector((state) => state.login.type);
+	const billData = useSelector((state) => state.bill.billRows);
 
 	if (accountType == 'HOUSEHOLDER')
 		return (
@@ -148,7 +34,7 @@ function DashboardBody() {
 					{/*Plug rating value*/}
 				</div>
 				{/* <div className="maxWidth"></div> */}
-				<Tables colNames={tableCols} rows={tableRows}></Tables>
+				{/* <LineChart billData={billData} /> */}
 				{/*Plug bill details*/}
 			</div>
 		);

@@ -5,31 +5,37 @@
 	background-color: $primary;
 	color: $white;
 	font-size: 0.75em;
-	width: clamp(5em, 20vw, 6em);
+	width: clamp(5em, 20vw, 10em);
 	height: auto;
 	padding: 1em 0 1em 0;
 	align-content: center;
 	gap: 0.5em;
+	z-index: 2;
 	a:last-child {
 		margin-top: auto;
 	}
 	span {
 		@extend .horizontalCenter;
-		text-align: center;
+		text-align: left;
 		width: 100%;
-	}
-	hr {
-		@extend .horizontalCenter;
-		border: 3px 0 0 0 solid $white;
-		border-radius: 0.2em;
-		margin: none;
-		width: clamp(4em, 80%, 6em);
-		outline: hidden;
-		box-shadow: none;
-		&.active {
-			border-color: $secondary;
+		display: flex;
+		height: 100%;
+		.icon{
+			flex: 30%;
+			display: grid;
+			place-items: center;
+			margin: 0;
+		}
+		.title{
+			flex: 70%;
+			display: flex;
+			align-items: center;
 		}
 	}
+	#active{
+		background-color: lighten($color: $primary, $amount: 10)
+	}
+
 	a,
 	a:hover,
 	a:focus,
@@ -37,6 +43,12 @@
 		text-decoration: none;
 		color: inherit;
 		text-align: center;
+	}
+	a:hover{
+		background-color: lighten($color: $primary, $amount: 10)
+	}
+	a{
+		height: 3em;
 	}
 }
 
@@ -59,7 +71,7 @@
 	background-color: $white;
 	display: flex;
 	min-height: 100vh;
-	min-width: 100vw;
+	min-width: 100%;
 }
 
 .body {
@@ -67,6 +79,9 @@
 	display: flex;
 	flex-wrap: wrap;
 	gap: 1.5em;
+	width: 100%;
+	align-items: center;
+	justify-content: center;
 	.topMargin {
 		margin-top: 0.5em;
 	}
@@ -75,6 +90,7 @@
 		font-weight: 700;
 		font-size: 2rem;
 		color: $primary;
+		width: 100%;
 	}
 	.bio {
 		color: $primary;
@@ -107,3 +123,4 @@
 		}
 	}
 }
+

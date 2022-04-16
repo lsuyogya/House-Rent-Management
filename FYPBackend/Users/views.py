@@ -18,12 +18,15 @@ from rest_framework.authtoken.models import Token
 User = get_user_model()
 
 # Create your views here.
+
+
 class UserAPIView(APIView):
-   permission_classes = [IsAuthenticated] 
-   def get(self, request):
-      users = User.objects.all()
-      serializer = UserSerializer(users, many=True)
-      return Response(serializer.data)
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        users = User.objects.all()
+        serializer = UserSerializer(users, many=True)
+        return Response(serializer.data)
 
 
 # class CustomTokenView(djoser.views.TokenCreateView):
@@ -56,16 +59,28 @@ class TokenObtainView(ObtainAuthToken, APIView):
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data,
                                            context={'request': request})
-        serializer.is_valid(raise_exception=True)
+        serializer.is_valid()
         user = serializer.validated_data['user']
         token, created = Token.objects.get_or_create(user=user)
         custom_response = {
             'token': token.key,
-            'type': user.type
+            'type': user.type,
+            'id': user.id
         }
         return Response(custom_response)
 
+
 class TokenCheckAPIView(APIView):
-    permission_classes = [IsAuthenticated] 
+    permission_classes = [IsAuthenticated]
+
     def get(self, request):
         return Response('true')
+
+
+class TenantUserAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        users = User.objects.all().filter(type="TENANT")
+        serializer = UserSerializer(users, many=True)
+        return Response(serializer.data)

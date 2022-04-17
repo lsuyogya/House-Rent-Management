@@ -12,7 +12,7 @@ const Houses = () => {
 		dispatch(getMyBills());
 	}, []);
 
-	const housesData = useSelector((state) => state.bill.billRows);
+	const housesData = useSelector((state) => state.bill.myBills);
 
 	return (
 		<div className="bodyContainer">

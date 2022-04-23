@@ -93,7 +93,7 @@
 		width: 100%;
 	}
 	.bio {
-		color: $primary;
+		color: $purple;
 		font-size: 1.1rem;
 		height: clamp(6em, 20vh, 8em);
 		width: clamp(10em, 50vw, 40em);
@@ -109,11 +109,12 @@
 			text-align: center;
 			font-weight: 700;
 			font-size: 1.2rem;
-			color: $secondary;
+			color: $purple;
 		}
 	}
 	.rating {
 		@extend .bio;
+
 		height: clamp(6em, 20vh, 8em);
 		width: clamp(6em, 20vw, 40em);
 		display: flex;
@@ -122,5 +123,15 @@
 			@extend .horizontalCenter;
 		}
 	}
+}
+
+.purpleText{
+	color: $purple;
+}
+.blueText{
+	color: $primary;
+}
+.bgPrimary{
+	background-color: $primary;
 }
 

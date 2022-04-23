@@ -62,9 +62,10 @@ const AddBill = () => {
 		<>
 			<div className="bodyContainer">
 				<Navbar active="Bills" />
-				<div className="flex">
-					<form className="houeAddition">
-						<p>Enter The Bill Details</p>
+				<div className="flex card">
+					<form
+						className="houeAddition"
+						style={{ marginTop: 'auto', marginBottom: 'auto' }}>
 						<input
 							name="electricityCost"
 							type="number"

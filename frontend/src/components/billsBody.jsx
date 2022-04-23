@@ -7,6 +7,13 @@ const billsBody = ({ billsData, nav }) => {
 		<div className="body">
 			{/* <span className="title">Bill Details</span> */}
 			{/* <div> */}
+			<div style={{ width: '100%', textAlign: 'right' }}>
+				<Button
+					label="Add Bill"
+					onclick={() => nav('/addBill')}
+					variant="secondary"
+				/>
+			</div>
 
 			{billsData
 				?.slice(0)
@@ -108,13 +115,6 @@ const billsBody = ({ billsData, nav }) => {
 					);
 				})}
 			{/* </div> */}
-			<div style={{ width: '100%', textAlign: 'left' }}>
-				<Button
-					label="Add Bill"
-					onclick={() => nav('/addBill')}
-					variant="secondary"
-				/>
-			</div>
 		</div>
 	);
 };

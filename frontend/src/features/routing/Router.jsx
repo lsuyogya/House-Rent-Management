@@ -13,6 +13,7 @@ import AddHouse from '../../containers/AddHouse';
 import UpdateHouse from '../../containers/UpdateHouse';
 import AddBill from '../../containers/AddBill';
 import UpdateBill from '../../containers/UpdateBill';
+import Reviews from '../../containers/Reviews';
 
 const Router = () => {
 	return (
@@ -31,6 +32,7 @@ const Router = () => {
 					<Route path="analysis" element={<Analysis />} />
 					<Route path="profile" element={<Profile />} />
 					<Route path="map" element={<Map />} />
+					<Route path="reviews" element={<Reviews />} />
 				</Route>
 				<Route path="*" element={<NotFound />} />
 			</Routes>

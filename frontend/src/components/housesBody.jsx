@@ -7,6 +7,13 @@ const housesBody = ({ housesData, nav }) => {
 		<div className="body">
 			{/* <span className="title">House Details</span> */}
 			{/* <div> */}
+			<div style={{ width: '100%', textAlign: 'right' }}>
+				<Button
+					label="Add House"
+					onclick={() => nav('/AddHouse')}
+					variant="secondary"
+				/>
+			</div>
 
 			{housesData ? (
 				housesData.map((house, index) => (
@@ -54,6 +61,14 @@ const housesBody = ({ housesData, nav }) => {
 										nav('/UpdateHouse', { state: { house } })
 									}></Button>
 							</span>
+							<span className="value">
+								<Button
+									label="Reviews"
+									variant="secondary"
+									onclick={() =>
+										nav('/Reviews', { state: { house } })
+									}></Button>
+							</span>
 						</div>
 					</div>
 				))
@@ -61,13 +76,6 @@ const housesBody = ({ housesData, nav }) => {
 				<div> No Data</div>
 			)}
 			{/* </div> */}
-			<div style={{ width: '100%', textAlign: 'left' }}>
-				<Button
-					label="Add House"
-					onclick={() => nav('/AddHouse')}
-					variant="secondary"
-				/>
-			</div>
 		</div>
 	);
 };

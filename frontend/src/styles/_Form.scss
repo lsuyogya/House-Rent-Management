@@ -1,4 +1,4 @@
-.login, .houeAddition {
+.login, .houeAddition, .addition {
   font-family: "Lato", sans-serif;
   width: 320px;
   font-size: 16px;
@@ -94,7 +94,7 @@
   margin-left: auto;
   margin-right: auto;
 }
-.houeAddition{
+.houeAddition, .addition{
   // flex: 50%;
   height: auto;
 }

@@ -24,8 +24,7 @@ class BillsAPIView(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response("Bill Created Successfully")
-        else:
-            return Response(serializer.errors)
+        return Response(serializer.errors)
 
     def patch(self, request, pk, *args, **kwargs):
         id = pk

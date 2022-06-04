@@ -8,6 +8,8 @@ django = "*"
 djangorestframework = "*"
 djoser = "*"
 django-cors-headers = "*"
+pyparsing = "*"
+pydot = "*"
 
 [dev-packages]
 autopep8 = "*"

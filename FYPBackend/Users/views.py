@@ -1,3 +1,4 @@
+from multiprocessing import managers
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.views import Response
@@ -25,6 +26,15 @@ class UserAPIView(APIView):
 
     def get(self, request):
         users = User.objects.all()
+        serializer = UserSerializer(users, many=True)
+        return Response(serializer.data)
+
+
+class MyUserAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        users = User.objects.filter(pk=request.user.id)
         serializer = UserSerializer(users, many=True)
         return Response(serializer.data)
 
@@ -84,3 +94,20 @@ class TenantUserAPIView(APIView):
         users = User.objects.all().filter(type="TENANT")
         serializer = UserSerializer(users, many=True)
         return Response(serializer.data)
+
+
+class UpdateAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def patch(self, request, pk, *args, **kwargs):
+        id = pk
+        user = request.user.id
+        if (user == id):
+            ownHouse = User.objects.get(pk=id)
+            serializer = UserSerializer(
+                ownHouse, data=request.data, partial=True)
+            if serializer.is_valid():
+                serializer.save()
+                return Response("Profile updated successfully")
+            return Response(serializer.errors)
+        return Response("User not authenticated")

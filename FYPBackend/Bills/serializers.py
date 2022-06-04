@@ -30,6 +30,7 @@ class BillSerializer(serializers.ModelSerializer):
     house = HouseSerializer()
     tenant = UserSerializer()
     householder = UserSerializer()
+    creationDate = serializers.DateTimeField(format='%Y-%m-%d')
 
     class Meta:
         model = Bill
@@ -44,6 +45,7 @@ class BillSerializer(serializers.ModelSerializer):
             'householder',
             'creationDate',
             'status',
+            'paymentURL',
         ]
 
 
@@ -60,4 +62,5 @@ class BillPostSerializer(serializers.ModelSerializer):
             'tenant',
             'householder',
             'status',
+            'paymentURL'
         ]

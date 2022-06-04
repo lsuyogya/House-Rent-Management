@@ -15,6 +15,16 @@ class UserSerializer(serializers.ModelSerializer):
         ]
 
 
+class UserContactSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = [
+            'id',
+            'fullname',
+            'phone_number',
+        ]
+
+
 class HouseSerializer(serializers.ModelSerializer):
 
     householder = UserSerializer()
@@ -56,6 +66,7 @@ class HousePostSerializer(serializers.ModelSerializer):
 
 
 class HouseMapMarkerSerializer(serializers.ModelSerializer):
+    householder = UserContactSerializer()
 
     class Meta:
         model = House

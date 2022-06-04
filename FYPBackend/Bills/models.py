@@ -27,6 +27,7 @@ class Bill(models.Model):
     householder = models.ForeignKey(
         User, related_name='billHouseholder', on_delete=models.DO_NOTHING)
     creationDate = models.DateTimeField(auto_now_add=True, null=True)
+    paymentURL = models.TextField(null=True)
     # creationDate   = models.
     # water          = models.DecimalField(max_digits=20, decimal_places=4, default=None)
     # parking        = models.DecimalField(max_digits=20, decimal_places=4, default=None)

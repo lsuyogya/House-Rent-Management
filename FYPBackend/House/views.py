@@ -1,8 +1,5 @@
 from django.shortcuts import render
 from rest_framework.views import APIView, Response
-from uritemplate import partial
-
-from Users.models import User
 from .serializers import HouseSerializer, HousePostSerializer, HouseMapMarkerSerializer
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from .models import House
@@ -40,7 +37,8 @@ class HouseAPIView(APIView):
 
     def patch(self, request, pk, *args, **kwargs):
         id = pk
-        ownHouse = House.objects.get(pk=id)
+        ownHouse = House.objects.filter(
+            householder=request.user.id).get(pk=id)
         serializer = HousePostSerializer(
             ownHouse, data=request.data, partial=True)
         if serializer.is_valid():
@@ -62,6 +60,7 @@ class MyHouseAPIView(APIView):
             houses = House.objects.all().filter(householder__exact=current_user.id)
         if current_user.type == current_user.Types.TENANT:
             houses = House.objects.all().filter(tenant__exact=current_user.id)
+            # .filter(tenant__exact=current_user.id)
 
         serializer = HouseSerializer(houses, many=True)
         return Response(serializer.data)
@@ -71,7 +70,7 @@ class HouseMapMarkerAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
-        houses = House.objects.all()
+        houses = House.objects.filter(status="AVAILABLE")
         serializer = HouseMapMarkerSerializer(houses, many=True)
         return Response(serializer.data)
     # def post(self, request):

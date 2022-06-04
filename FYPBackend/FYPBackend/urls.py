@@ -28,9 +28,11 @@ urlpatterns = [
     path('houses/', include("House.urls")),
     # path('', include(router.urls)),
     path('bills/', include("Bills.urls")),
+    path('reviews/', include("Review.urls")),
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.authtoken')),
 ]
 
 if settings.DEBUG:
-   urlpatterns+=static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)

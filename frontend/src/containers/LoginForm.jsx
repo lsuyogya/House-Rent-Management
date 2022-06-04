@@ -69,8 +69,8 @@ const LoginForm = () => {
 						display: 'flex',
 						marginTop: '5px',
 					}}>
-					<input type="checkbox" className="checkBox" name="Remember me" />
-					<label className="checkBox label">Remember me</label>
+					{/* <input type="checkbox" className="checkBox" name="Remember me" />
+					<label className="checkBox label" >Remember me</label> */}
 				</div>
 				<Button
 					label="Sign in"
@@ -79,9 +79,16 @@ const LoginForm = () => {
 					onclick={loginSubmitHandler}
 				/>
 				<span className="secondaryText"> Don’t have an account? </span>
-				<Link to="/register">
-					<span className="highlight"> Create your account </span>
-				</Link>
+				{/* <Link to="/register"> */}
+				<span
+					className="highlight"
+					onClick={() => {
+						window.location.href = '/register';
+					}}>
+					{' '}
+					Create your account{' '}
+				</span>
+				{/* </Link> */}
 			</form>
 		</>
 	);

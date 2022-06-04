@@ -15,8 +15,26 @@ import {
 } from 'react-leaflet';
 import { setHouse } from '../features/redux/houseSlice';
 import { blue } from '@material-ui/core/colors';
+import Modal from '@mui/material/Modal';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
 
 const AddHouse = () => {
+	const style = {
+		position: 'absolute',
+		top: '50%',
+		left: '50%',
+		transform: 'translate(-50%, -50%)',
+		width: 400,
+		bgcolor: 'background.paper',
+		border: '2px solid #000',
+		boxShadow: 24,
+		p: 4,
+	};
+	const [open, setOpen] = React.useState(false);
+	const handleOpen = () => setOpen(true);
+	const handleClose = () => setOpen(false);
+
 	const authData = useSelector((state) => state.login);
 	const dispatch = useDispatch();
 	const formData = new FormData();
@@ -33,6 +51,7 @@ const AddHouse = () => {
 		longitude: '',
 		householder: authData.id,
 	});
+	const lableStyle = { color: '#A270B1', fontWeight: '700' };
 
 	useEffect(() => {
 		if (dispatchToggle) {
@@ -67,7 +86,12 @@ const AddHouse = () => {
 	};
 
 	const addSubmitHandler = (e) => {
-		setdispatchToggle(true);
+		var emptyTag = false;
+		for (var key in formDetails) {
+			if (formDetails[key] == '') emptyTag = true;
+		}
+
+		emptyTag ? handleOpen() : setdispatchToggle(true);
 	};
 
 	const MapEvents = () => {
@@ -90,47 +114,64 @@ const AddHouse = () => {
 	return (
 		<>
 			<div className="bodyContainer">
+				<Modal open={open} onClose={handleClose}>
+					<Box sx={style}>
+						<Typography id="modal-modal-title" variant="h6" component="h2">
+							Invalid Details
+						</Typography>
+						<Typography id="modal-modal-description" sx={{ mt: 2 }}>
+							Please ensure that you have filled all the form fields
+							appropriately.
+						</Typography>
+					</Box>
+				</Modal>
 				<Navbar active="Houses" />
 				<div className="flex">
 					<form className="houeAddition">
 						<p>Enter The House Details</p>
+						<label style={lableStyle}>No. of Floors</label>
 						<input
 							name="floors"
 							type="number"
-							placeholder="floors"
+							placeholder="Enter The No of Floors in the House"
 							className="textField"
 							onChange={handleChange}
 						/>
+						<label style={lableStyle}>No. of Rooms</label>
 						<input
 							name="rooms"
 							type="number"
-							placeholder="Rooms"
+							placeholder="Enter The No of Rooms in the House"
 							className="textField"
 							onChange={handleChange}
 						/>
+						<label style={lableStyle}>Monthly Rent Amount</label>
 						<input
 							name="monthlyRent"
 							type="number"
-							placeholder="Monthly Rent Amount"
+							placeholder="Enter The Monthly Rent Amount"
 							className="textField"
 							onChange={handleChange}
 						/>
+						<label style={lableStyle}>Longitude of the House</label>
 						<input
 							name="longitude"
 							type="number"
-							placeholder="Longitude"
+							placeholder="Click on the Map to Set Longitude"
 							className="textField"
 							onChange={handleChange}
 							disabled
 						/>
+						<label style={lableStyle}>Latitude of the House</label>
 						<input
 							name="latitude"
 							type="number"
-							placeholder="Latitude"
+							placeholder="Click on the Map to Set Latitude"
 							className="textField"
 							onChange={handleChange}
 							disabled
 						/>
+						<label style={lableStyle}>Select the House Status</label>
 						<select
 							name="status"
 							list="options"
@@ -140,9 +181,15 @@ const AddHouse = () => {
 								Status Type
 							</option>
 							<option value="AVAILABLE">Available</option>
-							<option value="OCCUPIED">Occupied</option>
 							<option value="INACTIVE">Inactive</option>
 						</select>
+						{/* <input
+							name="paymentURL"
+							type="text"
+							placeholder="Enter The Stripe Payment URL For Your House"
+							className="textField"
+							onChange={handleChange}
+						/> */}
 
 						<label
 							htmlFor="photos"
@@ -165,18 +212,23 @@ const AddHouse = () => {
 							onclick={addSubmitHandler}
 						/>
 					</form>
+
 					<MapContainer
 						center={[27.7172, 85.324]}
 						zoom={13}
-						style={{ height: '85vh', width: '60vw' }}>
+						style={{
+							height: '85vh',
+							width: '60vw',
+							backgroundColor: '#ecf0f3',
+							boxShadow: '1em 1em 1em #d1d9e6, -1em -1em 1em #ffffff90',
+							borderRadius: '0.5em',
+						}}>
 						<TileLayer
 							attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 							url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 						/>
 						<Marker position={[formDetails.latitude, formDetails.longitude]}>
-							<Popup>
-								A pretty CSS3 popup. <br /> Easily customizable.
-							</Popup>
+							<Popup>Selected house location.</Popup>
 						</Marker>
 						<MapEvents />
 					</MapContainer>

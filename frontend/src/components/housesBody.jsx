@@ -1,21 +1,26 @@
 import React from 'react';
 import Button from './Button';
 
-const housesBody = ({ housesData, nav }) => {
+const housesBody = ({ housesData, nav, userType }) => {
 	console.log(housesData);
 	return (
 		<div className="body">
 			{/* <span className="title">House Details</span> */}
 			{/* <div> */}
-			<div style={{ width: '100%', textAlign: 'right' }}>
-				<Button
-					label="Add House"
-					onclick={() => nav('/AddHouse')}
-					variant="secondary"
-				/>
-			</div>
 
-			{housesData ? (
+			{userType == 'HOUSEHOLDER' ? (
+				<div style={{ width: '100%', textAlign: 'right' }}>
+					<Button
+						label="Add House"
+						onclick={() => nav('/AddHouse')}
+						variant="secondary"
+					/>
+				</div>
+			) : (
+				<></>
+			)}
+
+			{housesData?.length != 0 ? (
 				housesData.map((house, index) => (
 					<div className="card">
 						<div>
@@ -52,28 +57,41 @@ const housesBody = ({ housesData, nav }) => {
 							<span className="value">{house.tenant?.fullname}</span>
 							{/* parseFloat(house.monthlyRent.toFixed(4)); */}
 						</div>
-						<div>
-							<span className="key">
-								<Button
-									label="Update"
-									variant="primary"
-									onclick={() =>
-										nav('/UpdateHouse', { state: { house } })
-									}></Button>
-							</span>
-							<span className="value">
-								<Button
-									label="Reviews"
-									variant="secondary"
-									onclick={() =>
-										nav('/Reviews', { state: { house } })
-									}></Button>
-							</span>
-						</div>
+						{userType == 'HOUSEHOLDER' ? (
+							<div>
+								<span className="key">
+									<Button
+										label="Update"
+										variant="primary"
+										onclick={() =>
+											nav('/UpdateHouse', { state: { house } })
+										}></Button>
+								</span>
+								<span className="value">
+									<Button
+										label="Reviews"
+										variant="secondary"
+										onclick={() =>
+											nav('/Reviews', { state: { house } })
+										}></Button>
+								</span>
+							</div>
+						) : (
+							<div>
+								<span className="value">
+									<Button
+										label="Reviews"
+										variant="secondary"
+										onclick={() =>
+											nav('/Reviews', { state: { house } })
+										}></Button>
+								</span>
+							</div>
+						)}
 					</div>
 				))
 			) : (
-				<div> No Data</div>
+				<div className="title"> No Data</div>
 			)}
 			{/* </div> */}
 		</div>

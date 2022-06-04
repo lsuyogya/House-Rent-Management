@@ -15,11 +15,12 @@ const Houses = () => {
 	}, []);
 
 	const housesData = useSelector((state) => state.house.myHouses);
+	const userType = useSelector((state) => state.login.type);
 
 	return (
 		<div className="bodyContainer">
 			<Navbar active="Houses" />
-			<Body housesData={housesData} nav={nav} />
+			<Body housesData={housesData} nav={nav} userType={userType} />
 		</div>
 	);
 };

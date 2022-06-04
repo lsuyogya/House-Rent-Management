@@ -1,19 +1,76 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from './Button';
 import moment from 'moment';
+import Modal from '@mui/material/Modal';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
 
-const billsBody = ({ billsData, nav }) => {
+const BillsBody = ({ billsData, nav, userType }) => {
+	const style = {
+		position: 'absolute',
+		top: '50%',
+		left: '50%',
+		transform: 'translate(-50%, -50%)',
+		width: 400,
+		bgcolor: 'background.paper',
+		border: '2px solid #000',
+		boxShadow: 24,
+		p: 4,
+	};
+
+	const [open, setOpen] = React.useState(false);
+	const handleOpen = () => setOpen(true);
+	const handleClose = () => setOpen(false);
+	const [modalData, setmodalData] = useState({ title: '', body: '' });
+
+	const checkoutHandler = (bill) => {
+		const url = bill.paymentURL;
+		if (url != undefined) {
+			setmodalData({
+				title: 'Payment Redirection',
+				body:
+					'You will be redirected to the payment URL set by your householder. If you encounter any issue, please contact your householder.',
+			});
+			handleOpen();
+			window.open(url, '_blank');
+		} else {
+			// alert(
+			// 	'Checkout page not set.\n Please contack your householder for further details.'
+			// );
+			setmodalData({
+				title: 'Checkout page not set',
+				body: 'Please contact your householder for further details.',
+			});
+			handleOpen();
+		}
+	};
+
 	return (
 		<div className="body">
 			{/* <span className="title">Bill Details</span> */}
 			{/* <div> */}
-			<div style={{ width: '100%', textAlign: 'right' }}>
-				<Button
-					label="Add Bill"
-					onclick={() => nav('/addBill')}
-					variant="secondary"
-				/>
-			</div>
+
+			<Modal open={open} onClose={handleClose}>
+				<Box sx={style}>
+					<Typography id="modal-modal-title" variant="h6" component="h2">
+						{modalData.title}
+					</Typography>
+					<Typography id="modal-modal-description" sx={{ mt: 2 }}>
+						{modalData.body}
+					</Typography>
+				</Box>
+			</Modal>
+			{userType == 'HOUSEHOLDER' ? (
+				<div style={{ width: '100%', textAlign: 'right' }}>
+					<Button
+						label="Add Bill"
+						onclick={() => nav('/addBill')}
+						variant="secondary"
+					/>
+				</div>
+			) : (
+				<></>
+			)}
 
 			{billsData
 				?.slice(0)
@@ -23,17 +80,9 @@ const billsBody = ({ billsData, nav }) => {
 					const time = moment(bill.creationDate).format(' h:mm:ss a');
 					return (
 						<div className="card">
-							{/* <div>
-						<img
-							src={`http://localhost:8000${bill.photos}`}
-							alt="Image Load Failed"
-							height="400px"></img>
-					</div> */}
-							{/* {Date(bill.creationDate).get} */}
 							<div>
 								<span className="key">Bill Number</span>
 								<span className="value">{bill.id}</span>
-								{/* <div className="index">{index + 1}</div> */}
 							</div>
 							<div>
 								<span className="key">Issue Date</span>
@@ -58,25 +107,25 @@ const billsBody = ({ billsData, nav }) => {
 							<div>
 								<span className="key">Monthly Rent Amount</span>
 								<span className="value">
-									{parseFloat(bill.rentAmount.toString())}
+									{parseFloat(bill.rentAmount?.toString())}
 								</span>
 							</div>
 							<div>
 								<span className="key">Waste Disposal Charge</span>
 								<span className="value">
-									{parseFloat(bill.wasteDisposalCost.toString())}
+									{parseFloat(bill.wasteDisposalCost?.toString())}
 								</span>
 							</div>
 							<div>
 								<span className="key">Electricity Charge</span>
 								<span className="value">
-									{parseFloat(bill.electricityCost.toString())}
+									{parseFloat(bill.electricityCost?.toString())}
 								</span>
 							</div>
 							<div>
 								<span className="key">Water Charge</span>
 								<span className="value">
-									{parseFloat(bill.waterCost.toString())}
+									{parseFloat(bill.waterCost?.toString())}
 								</span>
 							</div>
 							<hr
@@ -97,20 +146,28 @@ const billsBody = ({ billsData, nav }) => {
 									)}
 								</span>
 							</div>
-							{/* <div>
-						<span className="key">Householder</span>
-						<span className="value">{bill.householder?.fullname}</span>
-					</div> */}
-							<div>
-								<span className="key">
-									<Button
-										label="Update"
-										variant="primary"
-										onclick={() =>
-											nav('/UpdateBill', { state: { bill } })
-										}></Button>
-								</span>
-							</div>
+
+							{bill.status != 'PAID' ? (
+								<div>
+									<span className="key">
+										{userType == 'HOUSEHOLDER' ? (
+											<Button
+												label="Update"
+												variant="primary"
+												onclick={() =>
+													nav('/UpdateBill', { state: { bill } })
+												}></Button>
+										) : (
+											<Button
+												label="Pay"
+												variant="primary"
+												onclick={() => checkoutHandler(bill)}></Button>
+										)}
+									</span>
+								</div>
+							) : (
+								<></>
+							)}
 						</div>
 					);
 				})}
@@ -119,4 +176,4 @@ const billsBody = ({ billsData, nav }) => {
 	);
 };
 
-export default billsBody;
+export default BillsBody;

@@ -6,6 +6,8 @@ import tenantReducer from './tenantSlice';
 import logoutReducer from './logoutSlice';
 import checkReducer from './checkSlice';
 import billReducer from './billSlice';
+import profileReducer from './updateProfileSlice';
+import reviewReducer from './reviewSlice';
 
 import { configureStore } from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
@@ -23,16 +25,9 @@ const appReducer = combineReducers({
 	logout: logoutReducer,
 	check: checkReducer,
 	bill: billReducer,
+	profile: profileReducer,
+	review: reviewReducer,
 });
-
-// const rootReducer = (state, action) => {
-// 	if (action.type === 'logout/setData') {
-// 		storage.removeItem('persist:root')
-// 		storage.removeItem('authToken')
-// 	  	return appReducer(undefined, action)
-// 	}
-// 		return appReducer(state, action)
-// }
 
 const persistConfig = {
 	key: 'root',

@@ -9,6 +9,8 @@ import { patchBill } from '../features/redux/billSlice';
 import moment from 'moment';
 
 const UpdateBill = () => {
+	const lableStyle = { color: '#A270B1', fontWeight: '700' };
+
 	const tenantList = useSelector((state) => state.tenant.tenantDetails);
 	const dispatch = useDispatch();
 	const nav = useNavigate();
@@ -21,7 +23,8 @@ const UpdateBill = () => {
 	const [dispatchToggle, setdispatchToggle] = useState(false);
 
 	const [formDetails, setFormDetails] = useState({
-		status: '',
+		status: bill.status,
+		paymentURL: bill.paymentURL,
 	});
 	useEffect(() => {
 		dispatch(getTenant());
@@ -55,7 +58,14 @@ const UpdateBill = () => {
 			<div className="bodyContainer">
 				<Navbar active="Bills" />
 				<div className="flex">
-					<div className="card" style={{ height: '20em' }}>
+					<div
+						className="card"
+						style={{
+							height: 'auto',
+							display: 'flex',
+							flexDirection: 'column',
+							justifyContent: 'space-evenly',
+						}}>
 						<div>
 							<span className="key">Bill Number</span>
 							<span className="value">{bill.id}</span>
@@ -87,25 +97,25 @@ const UpdateBill = () => {
 						<div>
 							<span className="key">Monthly Rent Amount</span>
 							<span className="value">
-								{parseFloat(bill.rentAmount.toString())}
+								{parseFloat(bill.rentAmount?.toString())}
 							</span>
 						</div>
 						<div>
 							<span className="key">Waste Disposal Charge</span>
 							<span className="value">
-								{parseFloat(bill.wasteDisposalCost.toString())}
+								{parseFloat(bill.wasteDisposalCost?.toString())}
 							</span>
 						</div>
 						<div>
 							<span className="key">Electricity Charge</span>
 							<span className="value">
-								{parseFloat(bill.electricityCost.toString())}
+								{parseFloat(bill.electricityCost?.toString())}
 							</span>
 						</div>
 						<div>
 							<span className="key">Water Charge</span>
 							<span className="value">
-								{parseFloat(bill.waterCost.toString())}
+								{parseFloat(bill.waterCost?.toString())}
 							</span>
 						</div>
 						<hr
@@ -129,14 +139,32 @@ const UpdateBill = () => {
 					</div>
 
 					<form className="houeAddition">
-						<p>Enter The Bill Details</p>
+						<p
+							style={{
+								...lableStyle,
+								color: '#022755',
+								fontWeight: '700',
+								fontSize: '1.25em',
+								marginBottom: '3em',
+							}}>
+							Enter The Bill Details To be Updated
+						</p>
 
+						<label style={lableStyle}>Bill Status</label>
 						<select name="status" className="textField" onChange={handleChange}>
 							<option value="" disabled selected>
 								Change Status
 							</option>
 							<option value="PAID">Paid</option>
+							<option value="DUE">Due</option>
 						</select>
+
+						<label style={lableStyle}>Payment URL</label>
+						<input
+							name="paymentURL"
+							className="textField"
+							defaultValue={bill.paymentURL}
+							onChange={handleChange}></input>
 
 						<Button
 							label="Update Bill"

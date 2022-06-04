@@ -8,6 +8,8 @@ import { getTenant } from '../features/redux/tenantSlice';
 import { patchHouse } from '../features/redux/houseSlice';
 
 const UpdateHouse = () => {
+	const lableStyle = { color: '#A270B1', fontWeight: '700' };
+
 	const tenantList = useSelector((state) => state.tenant.tenantDetails);
 	const dispatch = useDispatch();
 	const nav = useNavigate();
@@ -15,7 +17,6 @@ const UpdateHouse = () => {
 	const { state } = useLocation();
 	const { house } = state;
 	const id = house.id;
-	console.log('tenantList', tenantList);
 
 	const [dispatchToggle, setdispatchToggle] = useState(false);
 
@@ -40,7 +41,9 @@ const UpdateHouse = () => {
 
 			for (var key in formData) if (formData[key] == '') formData.delete(key);
 
+			if (formDetails.status == 'AVAILABLE') formData.append('tenant', '');
 			const props = { formData: formData, id: id };
+
 			dispatch(patchHouse(props));
 			setdispatchToggle(false);
 			// nav('/houses'); //Nav did not refresh the page on load, window push does
@@ -108,14 +111,25 @@ const UpdateHouse = () => {
 					</div>
 
 					<form className="houeAddition">
-						<p>Enter The House Details</p>
+						<p
+							style={{
+								...lableStyle,
+								color: '#022755',
+								fontWeight: '700',
+								fontSize: '1.25em',
+								marginBottom: '3em',
+							}}>
+							Enter The Details To Be Updated
+						</p>
+						<label style={lableStyle}>Monthly Rent Amount</label>
 						<input
 							name="monthlyRent"
 							type="number"
-							placeholder="Monthly Rent Amount"
+							placeholder="Enter New Monthly If Necessary"
 							className="textField"
 							onChange={handleChange}
 						/>
+						<label style={lableStyle}>House Status</label>
 						<select name="status" className="textField" onChange={handleChange}>
 							<option value="" disabled selected>
 								Status Type
@@ -124,6 +138,7 @@ const UpdateHouse = () => {
 							<option value="OCCUPIED">Occupied</option>
 							<option value="INACTIVE">Inactive</option>
 						</select>
+						<label style={lableStyle}>Tenant Occupying The House</label>
 						<select name="tenant" className="textField" onChange={handleChange}>
 							<option value="" disabled selected>
 								Tenant

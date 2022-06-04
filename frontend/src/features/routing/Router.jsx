@@ -14,6 +14,8 @@ import UpdateHouse from '../../containers/UpdateHouse';
 import AddBill from '../../containers/AddBill';
 import UpdateBill from '../../containers/UpdateBill';
 import Reviews from '../../containers/Reviews';
+import AllReviews from '../../containers/AllReviews';
+import AddReview from '../../containers/AddReview';
 
 const Router = () => {
 	return (
@@ -33,6 +35,8 @@ const Router = () => {
 					<Route path="profile" element={<Profile />} />
 					<Route path="map" element={<Map />} />
 					<Route path="reviews" element={<Reviews />} />
+					<Route path="allReviews" element={<AllReviews />} />
+					<Route path="addReview" element={<AddReview />} />
 				</Route>
 				<Route path="*" element={<NotFound />} />
 			</Routes>

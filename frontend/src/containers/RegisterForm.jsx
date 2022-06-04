@@ -4,8 +4,27 @@ import { ReactComponent as Logo } from '../assets/logo.svg';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setRegister } from '../features/redux/registerSlice';
+import Modal from '@mui/material/Modal';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
 
 const LoginForm = () => {
+	const style = {
+		position: 'absolute',
+		top: '50%',
+		left: '50%',
+		transform: 'translate(-50%, -50%)',
+		width: 400,
+		bgcolor: 'background.paper',
+		border: '2px solid #000',
+		boxShadow: 24,
+		p: 4,
+	};
+	const [open, setOpen] = React.useState(false);
+	const handleOpen = () => setOpen(true);
+	const handleClose = () => setOpen(false);
+	const [modalData, setmodalData] = useState({ title: '', body: '' });
+
 	const [formDetails, setFormDetails] = useState({
 		fullname: '',
 		password: '',
@@ -15,8 +34,6 @@ const LoginForm = () => {
 		profession: '',
 		citizenship: {},
 		bio: '',
-		// address: ""			,
-		// passwordConfirm: "",
 	});
 
 	const registerData = useSelector((state) => state.register);
@@ -53,8 +70,20 @@ const LoginForm = () => {
 	};
 
 	const registerSubmitHandler = (e) => {
-		// dispatch(setRegister(formData))
-		setdispatchToggle(true);
+		var emptyTag = false;
+		for (var key in formDetails) {
+			if (formDetails[key] == '') {
+				emptyTag = true;
+				setmodalData({
+					title: 'Invalid Details',
+					body:
+						'Please ensure that you have filled all the form fields appropriately.',
+				});
+				break;
+			}
+		}
+
+		emptyTag ? handleOpen() : setdispatchToggle(true);
 
 		localStorage.clear();
 		console.log('Status', registerData.status);
@@ -71,6 +100,16 @@ const LoginForm = () => {
 
 	return (
 		<>
+			<Modal open={open} onClose={handleClose}>
+				<Box sx={style}>
+					<Typography id="modal-modal-title" variant="h6" component="h2">
+						{modalData.title}
+					</Typography>
+					<Typography id="modal-modal-description" sx={{ mt: 2 }}>
+						{modalData.body}
+					</Typography>
+				</Box>
+			</Modal>
 			<Logo />
 			<form className="login">
 				<p>Enter your credentials and register now!</p>

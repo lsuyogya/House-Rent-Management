@@ -31,6 +31,9 @@ const loginSlice = createSlice({
 				state.status = 'fulfilled';
 				state.id = action.payload?.id;
 				localStorage.setItem('authToken', action.payload.token);
+				// setTimeout(() => {
+				// 	window.location.href = '/';
+				// }, 1000);
 				window.location.href = '/';
 			})
 			.addCase(setLogin.pending, (state) => {
